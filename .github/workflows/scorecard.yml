@@ -7,14 +7,15 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  id-token: write # Needed for OIDC to submit results
-  security-events: write # Needed for uploading results to code scanning dashboard
+permissions: read-all
 
 jobs:
   analysis:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      security-events: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
