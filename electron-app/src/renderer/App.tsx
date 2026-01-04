@@ -15,6 +15,11 @@ import { FrigateConfig } from '../shared/types/config';
 import CameraConfig from './components/CameraConfig';
 import MQTTConfig from './components/MQTTConfig';
 import AudioConfig from './components/AudioConfig';
+import DetectorsConfig from './components/DetectorsConfig';
+import Go2RTCConfig from './components/Go2RTCConfig';
+import NetworkConfig from './components/NetworkConfig';
+import RecordingConfig from './components/RecordingConfig';
+import ZonesMasksConfig from './components/ZonesMasksConfig';
 
 declare global {
   interface Window {
@@ -148,6 +153,7 @@ export default function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Frigate Config GUI
           </Typography>
+          <Button color="inherit" onClick={() => setConfig({ mqtt: { host: '', port: 1883, topic_prefix: 'frigate', client_id: 'frigate' }, cameras: {}, audio: { enabled: false } })}>New</Button>
           <Button color="inherit" onClick={handleImport}>Import</Button>
           <Button color="inherit" onClick={handleExport}>Export</Button>
           <Button color="inherit" onClick={handleValidate}>Validate</Button>
@@ -159,6 +165,11 @@ export default function App() {
           <Tab label="Cameras" />
           <Tab label="MQTT" />
           <Tab label="Audio" />
+          <Tab label="Detectors" />
+          <Tab label="go2rtc" />
+          <Tab label="Recording/Snapshots" />
+          <Tab label="Network" />
+          <Tab label="Zones/Masks" />
         </Tabs>
       </Box>
 
@@ -170,6 +181,37 @@ export default function App() {
           />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
+        <TabPanel value={tabValue} index={3}>
+          <DetectorsConfig
+            config={config?.detectors || {}}
+            onChange={(detectors) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, detectors } : null)}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={4}>
+          <Go2RTCConfig
+            config={config?.go2rtc}
+            onChange={(go2rtc) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, go2rtc } : null)}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={5}>
+          <RecordingConfig
+            cameras={config?.cameras}
+            onChange={(cameras) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, cameras } : null)}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={6}>
+          <NetworkConfig
+            config={config?.network}
+            onChange={(network) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, network } : null)}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={7}>
+          <ZonesMasksConfig
+            cameras={config?.cameras}
+            onChange={(cameras) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, cameras } : null)}
+          />
+        </TabPanel>
+
           <MQTTConfig
             config={config?.mqtt}
             onChange={(mqtt) => setConfig((prev: FrigateConfig | null) => prev ? { ...prev, mqtt } : null)}
