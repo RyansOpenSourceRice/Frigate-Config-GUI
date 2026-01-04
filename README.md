@@ -8,6 +8,8 @@ This project is in early alpha development and is currently:
 - Not thoroughly tested in production environments
 - Missing some planned features
 - Subject to significant UI/UX changes
+- Built in the open with a vibe-coded approach in early phases; see disclosures below
+
 
 A professional desktop application for managing Frigate NVR configurations through an intuitive graphical interface. Built with modern web technologies and designed for reliability and ease of use.
 
@@ -19,6 +21,10 @@ A professional desktop application for managing Frigate NVR configurations throu
 [![Platform](https://img.shields.io/badge/Platform-Linux-green)](https://flathub.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.0-blue)](https://reactjs.org/)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/RyansOpenSourceRice/Frigate-Config-GUI?label=openssf%20scorecard)](https://securityscorecards.dev/viewer/?uri=github.com/RyansOpenSourceRice/Frigate-Config-GUI)
+[![Vibe Coded: Disclosure](https://img.shields.io/badge/Vibe%20Coded-Disclosure-informational?style=flat-square)](https://github.com/danielrosehill/Vibe-Coded-Disclosure)
+[![Non-Working State: Disclosure](https://img.shields.io/badge/Non--Working%20State-Disclosure-orange?style=flat-square)](docs/NON_WORKING_STATE.md)
+
 
 <!-- 
 Release checklist badge (add when available on Flathub):
@@ -125,6 +131,11 @@ This project follows Test-Driven Development (TDD) practices and uses modern too
 - TailwindCSS for styling
 - Vitest for testing
 - Electron for cross-platform support
+## Disclosures
+
+- Vibe-coded development may be present in early phases. See: https://github.com/danielrosehill/Vibe-Coded-Disclosure
+- Some components may be in a non-working state while under active development. See: [Non-Working State Disclosure](docs/NON_WORKING_STATE.md)
+
 
 ## Updates and Maintenance
 
