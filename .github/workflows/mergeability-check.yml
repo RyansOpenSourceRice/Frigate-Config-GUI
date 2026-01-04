@@ -19,13 +19,18 @@ jobs:
         run: |
           git fetch origin "+refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
           git fetch origin "pull/${{ github.event.pull_request.number }}/head:pr-branch"
+      - name: Configure git identity (for non-committing merges)
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
       - name: Simulate merge of PR into base
         run: |
           git checkout -B test-merge "origin/${{ github.base_ref }}"
-          if git merge --no-commit --no-ff pr-branch; then
+          if git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" merge --no-commit --no-ff pr-branch; then
             echo "Merge is clean."
           else
-            echo "Merge conflicts detected. Please rebase or merge latest '${{ github.base_ref }}' into your branch and resolve conflicts."
-            git merge --abort || true
+            echo "Merge conflicts or merge error detected. Attempting to abort if merge in progress..."
+            if [ -f .git/MERGE_HEAD ]; then git merge --abort; fi
+            echo "Please rebase or merge latest '${{ github.base_ref }}' into your branch and resolve conflicts."
             exit 1
           fi
