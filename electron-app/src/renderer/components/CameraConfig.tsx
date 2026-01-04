@@ -31,7 +31,7 @@ export default function CameraConfig({ config, onChange }: Props) {
         ffmpeg: {
           inputs: [{
             path: '',
-            roles: ['detect']
+            roles: ['detect'] as ('detect'|'record'|'audio')[]
           }]
         }
       }
@@ -67,7 +67,7 @@ export default function CameraConfig({ config, onChange }: Props) {
     if (!config) return;
 
     const camera = config[cameraName];
-    const newInputs = [...camera.ffmpeg.inputs];
+    const newInputs = [...camera.ffmpeg.inputs] as (ICameraConfig['ffmpeg']['inputs'][0])[];
     newInputs[inputIndex] = {
       ...newInputs[inputIndex],
       [field]: value
@@ -165,7 +165,7 @@ export default function CameraConfig({ config, onChange }: Props) {
                                 value={input.roles.join(',')}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(cameraName, index, 'roles', e.target.value.split(',').map((r: string) => r.trim()))}
                                 placeholder="detect, record"
-                                helperText="Available roles: detect, record, rtmp"
+                                helperText="Available roles: detect, record, audio"
                               />
                             </Grid>
                           </Grid>
