@@ -148,6 +148,7 @@ export default function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Frigate Config GUI
           </Typography>
+          <Button color="inherit" onClick={() => setConfig({ mqtt: { host: '', port: 1883, topic_prefix: 'frigate', client_id: 'frigate' }, cameras: {}, audio: { enabled: false } })}>New</Button>
           <Button color="inherit" onClick={handleImport}>Import</Button>
           <Button color="inherit" onClick={handleExport}>Export</Button>
           <Button color="inherit" onClick={handleValidate}>Validate</Button>
